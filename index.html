@@ -76,6 +76,7 @@
             border-top-left-radius: 30px;
             border-bottom-left-radius: 30px;
             box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
+            z-index: 5;
         }
         .sidebar.active {
             right: 0;
@@ -83,7 +84,7 @@
         .sidebar a {
             display: block;
             color: white;
-            padding: 15px;
+            padding: 17px;
             text-decoration: none;
             text-align: left;
             font-size: 18px;
@@ -108,7 +109,6 @@
             border: none;
             color: white;
             font-size: 18px;
-            margin-top: 20px;
         }
         .features {
             display: grid;
@@ -148,7 +148,7 @@
             text-decoration: none;
         }
         .footer {
-            width: 100%;
+            width: 99%;
             background: linear-gradient(180deg, #abc2ff, #0205a7);
             color: white;
             padding: 15px;
@@ -167,6 +167,13 @@
             .header-container {
                 flex-direction: row-reverse;
             }
+            .whatsapp-float {
+                bottom: 16%;
+                right: 20px;                
+            }
+            .footer{
+                width: 96%;
+            }
         }
     </style>
 </head>
@@ -182,6 +189,7 @@
             <a href="#"><b>AI Compiler</b></a>
             <a href="#"><b>Contact</b></a>
             <a href="#"><b>About Us</b></a>
+            <button class="theme-toggle" onclick="toggleTheme()"><i class='bx bx-moon'></i></button>
         </div>
     </div>
     <div class="sidebar" id="sidebar-menu">
@@ -222,6 +230,7 @@
         function toggleSidebar() {
             document.getElementById("sidebar-menu").classList.toggle("active");
         }
+        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-0FMOHrX1VX3RWxWj6X94";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
     </script>
 </body>
 </html>
