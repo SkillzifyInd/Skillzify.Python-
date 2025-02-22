@@ -15,7 +15,6 @@
         </div>
         <div class="nav">
             <a href="index.html"><b>Home</b></a>
-            <a href="study_mate.html"><b>Study Materials</b></a>
             <a href="#"><b>Python Learning</b></a>
             <a href="#"><b>AI Compiler</b></a>
             <a href="#"><b>Contact</b></a>
@@ -23,45 +22,70 @@
             <a href="login.html"><b>Login</b></a>
             <button class="theme-toggle" onclick="toggleTheme()"><i class='bx bx-moon'></i></button>
         </div>
-        
-    </div>
-    <div class="sidebar" id="sidebar-menu">
-        <span class="close-btn" onclick="toggleSidebar()">&times;</span>
-        <a href="index.html"><b>Home</b></a>
-        <a href="study_mate.html"><b>Study Materials</b></a>
-        <a href="#"><b>Python Learning</b></a>
-        <a href="#"><b>AI Compiler</b></a>
-        <a href="#"><b>Contact</b></a>
-        <a href="#"><b>About Us</b></a>
-        <a href="login.html"><b>Login</b></a>
-        
-        <button class="theme-toggle" onclick="toggleTheme()"><i class='bx bx-moon'></i></button>
     </div>
 
     <div class="body_container">
         <h2>Create a New Account</h2>
-        <form action="register_process.php" method="POST">
-            <input type="text" name="username" placeholder="Choose a username" required>
-            <input type="email" name="email" placeholder="Enter your email" required>
-            <input type="password" name="password" placeholder="Create a password" required>
+        <form id="register-form">
+            <input type="text" id="username" placeholder="Choose a username" required>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <input type="password" id="password" placeholder="Create a password" minlength="6" required>
             <button type="submit">Register</button>
         </form>
         <p>Already have an account? <a href="login.html">Login here</a></p>
     </div>
-    <a href="https://whatsapp.com/channel/0029Vb0aOSuG8l5DXJAK0S3X" class="whatsapp-float" target="_blank"><i class='bx bxl-whatsapp'></i></a>
-    <div class="footer">
-        <p>&copy; 2025 Skillzify. All Rights Reserved.</p>
-    </div>
+    
     <script>
         function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            const logo = document.getElementById("logo-img");
-            logo.src = document.body.classList.contains("dark-mode") ? "Light No BG.png" : "Dark No BG.png";
+            let darkMode = localStorage.getItem("dark-mode");
+            document.body.classList.toggle('dark-mode', darkMode !== "enabled");
+            localStorage.setItem("dark-mode", darkMode === "enabled" ? "disabled" : "enabled");
+            document.getElementById("logo-img").src = darkMode === "enabled" ? "Dark No BG.png" : "Light No BG.png";
         }
+
         function toggleSidebar() {
             document.getElementById("sidebar-menu").classList.toggle("active");
         }
-        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-0FMOHrX1VX3RWxWj6X94";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+
+        window.onload = () => {
+            if (localStorage.getItem("dark-mode") === "enabled") {
+                document.body.classList.add("dark-mode");
+                document.getElementById("logo-img").src = "Light No BG.png";
+            }
+        };
     </script>
+
+    <script type="module">
+        import { getAuth, createUserWithEmailAndPassword, updateProfile, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+        import "./auth.js"; // Load auth.js for session persistence
+    
+        const auth = getAuth();
+    
+        // Redirect if already logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.location.href = "index.html";
+            }
+        });
+    
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+    
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                await updateProfile(user, { displayName: username });
+    
+                alert("Registration successful!");
+                window.location.href = "index.html";
+            } catch (error) {
+                alert(error.message);
+            }
+        });
+    </script>
+    
 </body>
 </html>
