@@ -62,7 +62,6 @@ body {
     position: fixed;
     right: -300px;
     width: 195px;
-    height: 53%;
     background: linear-gradient(135deg, #0205a7, #3054a7);
     padding-top: 30px;
     transition: 0.5s cubic-bezier(0, 0, 0.76, -0.13);
@@ -193,8 +192,8 @@ form input {
 }
 
 button {
-    background: #0205a7;
-    color: white;
+    /* background: #0205a7; */
+    /* color: white; */
     padding: 10px;
     border: none;
     cursor: pointer;
@@ -205,7 +204,6 @@ button {
 button:hover {
     background: #001f5f;
 }
-
 p {
     margin-top: 15px;
 }
@@ -228,12 +226,14 @@ p a:hover {
 
 .file-system {
     width: 30%;
-    background: #f4f4f4;
+    background: linear-gradient(180deg, #abc2ff, #0205a7);
     padding: 15px;
     overflow-y: auto;
     border-right: 2px solid #ccc;
 }
-
+.dark-mode .file-system{
+    background: linear-gradient(173deg, #2a2eff, #000000 );
+}
 .folder {
     font-weight: bold;
     padding: 10px;
@@ -270,7 +270,7 @@ p a:hover {
 .file {
     padding: 8px;
     cursor: pointer;
-    background: #aca9ffb7;
+    background: #ffffffb7;
     margin-bottom: 5px;
     border-radius: 3px;
     border: 1px solid #c6c9f1;
