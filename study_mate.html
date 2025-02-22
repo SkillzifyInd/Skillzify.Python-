@@ -6,18 +6,7 @@
     <title>PDF File System</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="b440bc32-e9ac-43be-89a3-953408233c6f" type="text/javascript" async></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-EMJ8DSPWYE"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-    
-      gtag('config', 'G-EMJ8DSPWYE');
-    </script>
 </head>
-    
 <body>
 
 <!-- Navbar Start -->
@@ -130,7 +119,8 @@
 
         document.querySelectorAll('.file').forEach(file => {
             file.addEventListener('click', function() {
-                document.getElementById('pdfFrame').src = this.getAttribute('data-src');
+            checkAuthAndOpenPDF(this.getAttribute('data-src'));
+
             });
         });
         
@@ -154,25 +144,31 @@
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
+                // User is logged in
                 document.getElementById("login-link").style.display = "none";
                 document.getElementById("register-link").style.display = "none";
                 document.getElementById("logout-btn").style.display = "inline-block";
-            } else {
-                document.getElementById("login-link").style.display = "inline-block";
-                document.getElementById("register-link").style.display = "inline-block";
-                document.getElementById("logout-btn").style.display = "none";
-            }
-        });
-
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
+        
                 document.getElementById("login-link2").style.display = "none";
                 document.getElementById("register-link2").style.display = "none";
                 document.getElementById("logout-btn2").style.display = "inline-block";
+        
+                document.querySelectorAll('.restricted .file').forEach(file => {
+                    file.classList.remove('disabled');
+                });
             } else {
+                // User is logged out
+                document.getElementById("login-link").style.display = "inline-block";
+                document.getElementById("register-link").style.display = "inline-block";
+                document.getElementById("logout-btn").style.display = "none";
+        
                 document.getElementById("login-link2").style.display = "inline-block";
                 document.getElementById("register-link2").style.display = "inline-block";
                 document.getElementById("logout-btn2").style.display = "none";
+        
+                document.querySelectorAll('.restricted .file').forEach(file => {
+                    file.classList.add('disabled');
+                });
             }
         });
 
@@ -183,10 +179,27 @@
                 console.error("Logout failed", error);
             });
         };
+        // Function to check authentication before opening PDFs
+        function checkAuthAndOpenPDF(pdfSrc) {
+            const user = auth.currentUser;
+            if (user) {
+                document.getElementById('pdfFrame').src = pdfSrc;
+            } else {
+                alert("You must be logged in to view this PDF.");
+                window.location.href = "login.html";
+            }
+        }
+
+        document.querySelectorAll('.file').forEach(file => {
+             file.addEventListener('click', function() {
+                document.getElementById('pdfFrame').src = this.getAttribute('data-src');
+            checkAuthAndOpenPDF(this.getAttribute('data-src'));
+
+             });
+
+        });
+        
     </script>
-    <script>
-        (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-0FMOHrX1VX3RWxWj6X94";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
-        </script>
     
 <!-- Script End -->
 </body>
