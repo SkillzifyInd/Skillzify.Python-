@@ -16,6 +16,11 @@
     
       gtag('config', 'G-EMJ8DSPWYE');
     </script>
+    <style>
+        p{
+            color: red;
+        }
+    </style>
 </head>
 <body>
     <div class="header-container">
@@ -25,13 +30,25 @@
         </div>
         <div class="nav">
             <a href="index.html"><b>Home</b></a>
+            <a href="study_mate.html"><b>Study Materials</b></a>
             <a href="#"><b>Python Learning</b></a>
             <a href="#"><b>AI Compiler</b></a>
-            <a href="#"><b>Contact</b></a>
+            <a href="contact.html"><b>Contact</b></a>
             <a href="#"><b>About Us</b></a>
             <a href="register.html"><b>Register</b></a>
             <button class="theme-toggle" onclick="toggleTheme()"><i class='bx bx-moon'></i></button>
         </div>
+    </div>
+    <div class="sidebar" id="sidebar-menu">
+        <span class="close-btn" onclick="toggleSidebar()">&times;</span>
+        <a href="index.html"><b>Home</b></a>
+        <a href="study_mate.html"><b>Study Materials</b></a>
+        <a href="#"><b>Python Learning</b></a>
+        <a href="#"><b>AI Compiler</b></a>
+        <a href="contact.html"><b>Contact</b></a>
+        <a href="#"><b>About Us</b></a>
+        <a href="register.html" id="register-link2"><b>Register</b></a>
+        <button class="theme-toggle" onclick="toggleTheme()"><i class='bx bx-moon'></i></button>
     </div>
 
     <div class="body_container">
@@ -41,8 +58,13 @@
             <input type="password" id="password" placeholder="Enter your password" minlength="6" required>
             <button type="submit">Login</button>
         </form>
-        <p><a href="#" id="forgot-password">Forgot Password?</a></p>
+        <p><a href="forgotpass.html" id="forgot-password">Forgot Password?</a></p>
         <p>Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
+    <a href="https://whatsapp.com/channel/0029Vb0aOSuG8l5DXJAK0S3X" class="whatsapp-float" target="_blank"><i class='bx bxl-whatsapp'></i></a>
+    
+    <div class="footer">
+        <h5>&copy; 2025 Skillzify. All Rights Reserved.</h5>
     </div>
 
     <script>
