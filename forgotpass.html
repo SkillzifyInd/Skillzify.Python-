@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forgot Password - Skillzify</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* General Styles */
+body {
+    font-family: 'Trebuchet MS', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: black;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container */
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    width: 350px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+}
+
+/* Form Elements */
+h2 {
+    margin-bottom: 10px;
+    color: #0205a7;
+}
+
+p {
+    font-size: 14px;
+    color: #555;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 15px;
+}
+
+input {
+    width: 92%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Button */
+button {
+    background: linear-gradient(180deg, #abc2ff, #0205a7);
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: linear-gradient(170deg, #000000, #0205a7);
+}
+
+/* Response Message */
+#response-message {
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Back to Login */
+a {
+    display: block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #0205a7;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+    .container {
+        width: 90%;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Reset Your Password</h2>
+        <p>Enter your email to receive a password reset link.</p>
+
+        <form id="forgot-password-form">
+            <label for="email">Email Address:</label>
+            <input type="email" id="email" required>
+            <button type="submit">Send Reset Link</button>
+        </form>
+
+        <p id="response-message"></p>
+        <a href="login.html">Back to Login</a>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-app.js";
+        import { getAuth, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.3.1/firebase-auth.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA3FcUoQZ811vygR9oDITUwwiCDALYJ5zE",
+            authDomain: "skillzify2024.firebaseapp.com",
+            projectId: "skillzify2024",
+            storageBucket: "skillzify2024.firebasestorage.app",
+            messagingSenderId: "502836069827",
+            appId: "1:502836069827:web:db3ff7fd2fd161c4d6a976",
+            measurementId: "G-EMJ8DSPWYE"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Handle Password Reset
+        document.getElementById("forgot-password-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    document.getElementById("response-message").innerHTML = "✅ Reset link sent! Check your email.";
+                })
+                .catch((error) => {
+                    document.getElementById("response-message").innerHTML = "⚠️ " + error.message;
+                });
+        });
+    </script>
+</body>
+</html>
