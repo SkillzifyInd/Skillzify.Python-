@@ -66,12 +66,15 @@
             });
         };
     </script>
+    <style>
+    
+    </style>
     
     
 </head>
 <body>
 
-    <div class="header-container">
+    <div class="header-container" style="margin-top: 0px;">
         <button class="menu-toggle" onclick="toggleSidebar()"><i class='bx bx-menu'></i></button>
         
         <div class="logo">
@@ -80,7 +83,7 @@
         <div class="nav">
             <a href="study_mate.html"><b>Study Materials</b></a>
             <a href="#"><b>Python Learning</b></a>
-            <a href="#"><b>AI Compiler</b></a>
+            <a href="compiler.html"><b>Python Compiler</b></a>
             <a href="contact.html"><b>Contact</b></a>
             <a href="#"><b>About Us</b></a>
             <a href="login.html" id="login-link"><b>Login</b></a>
@@ -93,7 +96,7 @@
         <span class="close-btn" onclick="toggleSidebar()">&times;</span>
         <a href="study_mate.html"><b>Study Materials</b></a>
         <a href="#"><b>Python Learning</b></a>
-        <a href="#"><b>AI Compiler</b></a>
+        <a href="compiler.html"><b>Python Compiler</b></a>
         <a href="contact.html"><b>Contact</b></a>
         <a href="#"><b>About Us</b></a>
         <a href="login.html" id="login-link2"><b>Login</b></a>
@@ -101,7 +104,9 @@
         <a><button id="logout-btn2" style="display:none;" onclick="logout()"><b>Logout</b></button></a>
         <button class="theme-toggle" onclick="toggleTheme()"><i class='bx bx-moon'></i></button>
     </div>
-    
+
+        <img id="logo-img2" src="Dark No BG.png" alt="Skillzify logo" style="width:10%; margin-top :80px;" >
+
     <h1>Welcome to Skillzify</h1>
     <p>Your one-stop platform to master Python programming.</p>
     <div class="features">
@@ -131,6 +136,7 @@
             document.body.classList.toggle('dark-mode', darkMode !== "enabled");
             localStorage.setItem("dark-mode", darkMode === "enabled" ? "disabled" : "enabled");
             document.getElementById("logo-img").src = darkMode === "enabled" ? "Dark No BG.png" : "Light No BG.png";
+            document.getElementById("logo-img2").src = darkMode === "enabled" ? "Dark No BG.png" : "Light No BG.png";
         }
 
         function toggleSidebar() {
@@ -141,6 +147,8 @@
             if (localStorage.getItem("dark-mode") === "enabled") {
                 document.body.classList.add("dark-mode");
                 document.getElementById("logo-img").src = "Light No BG.png";
+                document.getElementById("logo-img2").src = "Light No BG.png";
+
             }
         };
     
