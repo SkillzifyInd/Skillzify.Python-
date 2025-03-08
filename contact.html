@@ -19,7 +19,7 @@
         /* Contact Section */
         .contact-container {
             width: 50%;
-            margin: 50px auto;
+            margin: 90px auto;
             background: rgba(255, 255, 255, 0.9);
             padding: 20px;
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
@@ -34,6 +34,9 @@
             color: black;
         }
 
+        p{
+            color: red;
+        }
         .dark-mode label{
             color: black;
         }
@@ -97,7 +100,7 @@
                         rating,
                         timestamp: new Date()
                     });
-                    document.getElementById("response-message").innerHTML = "<span class='success-animation'>&#10004;</span> Thank you for your feedback!";
+                    document.getElementById("response-message").innerHTML = "<span class='success-animation'>&#10004;</span><p> Thank you for your feedback!</p>";
                     document.getElementById("contact-form").reset();
                 } catch (error) {
                     console.error("Error adding document: ", error);
@@ -140,7 +143,7 @@
 <body>
 
     <!-- Header -->
-    <div class="header-container">
+    <div class="header-container" style="margin-top: -90px;">
         <button style="background: local;" class="menu-toggle" onclick="toggleSidebar()"><i class='bx bx-menu'></i></button>
         
         <div class="logo">
@@ -150,7 +153,7 @@
             <a href="index.html"><b>Home</b></a>
             <a href="study_mate.html"><b>Study Materials</b></a>
             <a href="#"><b>Python Learning</b></a>
-            <a href="#"><b>AI Compiler</b></a>
+            <a href="compiler.html"><b>Python Compiler</b></a>
             <a href="#"><b>About Us</b></a>
             <a href="login.html" id="login-link"><b>Login</b></a>
             <a href="register.html" id="register-link"><b>Register</b></a>
@@ -163,7 +166,7 @@
         <a href="index.html"><b>Home</b></a>
         <a href="study_mate.html"><b>Study Materials</b></a>
         <a href="#"><b>Python Learning</b></a>
-        <a href="#"><b>AI Compiler</b></a>
+        <a href="compiler.html"><b>Python Compiler</b></a>
         <a href="#"><b>About Us</b></a>
         <a href="login.html" id="login-link2"><b>Login</b></a>
         <a href="register.html" id="register-link2"><b>Register</b></a>
@@ -208,7 +211,7 @@
     <a href="https://whatsapp.com/channel/0029Vb0aOSuG8l5DXJAK0S3X" class="whatsapp-float" target="_blank"><i class='bx bxl-whatsapp'></i></a>
     
     <div class="footer">
-        <p>&copy; 2025 Skillzify. All Rights Reserved.</p>
+        <h5>&copy; 2025 Skillzify. All Rights Reserved.</h5>
     </div>
 
     <script>
@@ -243,8 +246,45 @@
                 this.classList.add('selected');
             });
         });
+
         (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="-0FMOHrX1VX3RWxWj6X94";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+        document.addEventListener("DOMContentLoaded", function () {
+            const stars = document.querySelectorAll('.star');
+            const ratingInput = document.getElementById('rating');
     
+            stars.forEach((star, index) => {
+                star.addEventListener('mouseover', function () {
+                    highlightStars(index);
+                });
+    
+                star.addEventListener('mouseleave', function () {
+                    resetStars();
+                });
+    
+                star.addEventListener('click', function () {
+                    selectStars(index);
+                });
+            });
+    
+            function highlightStars(index) {
+                stars.forEach((star, i) => {
+                    star.classList.toggle('hovered', i <= index);
+                });
+            }
+    
+            function resetStars() {
+                stars.forEach(star => {
+                    star.classList.remove('hovered');
+                });
+            }
+    
+            function selectStars(index) {
+                ratingInput.value = index + 1;
+                stars.forEach((star, i) => {
+                    star.classList.toggle('selected', i <= index);
+                });
+            }
+        });
     </script>
 
 </body>
